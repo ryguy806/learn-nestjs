@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class PokemonService {
   private pokemon = [
     { id: 1, name: 'Bulbasaur', type: 'Grass' },
-    { id: 2, name: 'Charger', type: 'Fire' },
+    { id: 2, name: 'Charmander', type: 'Fire' },
     { id: 3, name: 'Squirtle', type: 'Water' },
     { id: 4, name: 'Vulpix', type: 'Fire' },
     { id: 5, name: 'Staryu', type: 'Water' },
