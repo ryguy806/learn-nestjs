@@ -24,7 +24,7 @@ export class PokemonService {
 
   create(pokemon: { name: string; type: 'Fire' | 'Water' | 'Grass' }) {
     const pokemonByHighestId = [...this.pokemon].sort((a, b) => {
-      return (b.id = a.id);
+      return b.id - a.id;
     });
     const newPokemon = {
       id: pokemonByHighestId[0].id + 1,
