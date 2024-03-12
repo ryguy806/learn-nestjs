@@ -26,20 +26,20 @@ export class PokemonController {
   }
 
   @Post() //POST /pokemon/
-  create(@Body() pokemon: { name: string; type: string }) {
-    return pokemon;
+  create(@Body() pokemon: { name: string; type: 'Fire' | 'Water' | 'Grass' }) {
+    return this.pokemonService.create(pokemon);
   }
 
   @Patch(':id') //Patch /pokemon/:id
   update(
     @Param('id') id: string,
-    @Body() pokemonUpdate: { name: string; type: string },
+    @Body() pokemonUpdate: { name: string; type: 'Fire' | 'Water' | 'Grass' },
   ) {
-    return { id, ...pokemonUpdate };
+    return this.pokemonService.update(+id, pokemonUpdate);
   }
 
   @Delete(':id') //Delete /pokemon/:id
   delete(@Param('id') id: string) {
-    return { id };
+    return this.pokemonService.delete(+id);
   }
 }
