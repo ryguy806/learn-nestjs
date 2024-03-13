@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class PokemonService {
@@ -14,7 +15,7 @@ export class PokemonService {
   ];
 
   findAll(
-    role?:
+    type?:
       | 'Fire'
       | 'Water'
       | 'Grass'
@@ -35,14 +36,24 @@ export class PokemonService {
       | 'Ice'
       | 'Stellar',
   ) {
-    if (role) {
-      return this.pokemon.filter((pokemon) => pokemon.type === role);
+    if (type) {
+      const pokemonArray = this.pokemon.filter(
+        (pokemon) => pokemon.type === type,
+      );
+      if (pokemonArray.length === 0) {
+        throw new NotFoundException('No Pokemon of that type found.');
+        return pokemonArray;
+      }
+      return pokemonArray;
     }
-    return this.pokemon;
   }
 
   findOne(id: number) {
-    return this.pokemon.find((pokemon) => pokemon.id === id);
+    const pokemon = this.pokemon.find((pokemon) => pokemon.id === id);
+
+    if (!pokemon) throw new NotFoundException(`Pokemon #${id} not found`);
+
+    return pokemon;
   }
 
   create(pokemon: CreatePokemonDto) {
