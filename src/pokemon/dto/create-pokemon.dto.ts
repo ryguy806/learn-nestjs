@@ -1,7 +1,8 @@
-import { IsEnum, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreatePokemonDto {
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsEnum(
@@ -28,6 +29,7 @@ export class CreatePokemonDto {
     ],
     { message: 'Type must be a valid pokemon type' },
   )
+  @IsNotEmpty()
   type:
     | 'Fire'
     | 'Water'

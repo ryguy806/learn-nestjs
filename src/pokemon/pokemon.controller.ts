@@ -8,6 +8,7 @@ import {
   Post,
   Query,
   ParseIntPipe,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
@@ -51,14 +52,14 @@ export class PokemonController {
   }
 
   @Post() //POST /pokemon/
-  create(@Body() pokemon: CreatePokemonDto) {
+  create(@Body(ValidationPipe) pokemon: CreatePokemonDto) {
     return this.pokemonService.create(pokemon);
   }
 
   @Patch(':id') //Patch /pokemon/:id
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() pokemonUpdate: UpdatePokemonDto,
+    @Body(ValidationPipe) pokemonUpdate: UpdatePokemonDto,
   ) {
     return this.pokemonService.update(id, pokemonUpdate);
   }
