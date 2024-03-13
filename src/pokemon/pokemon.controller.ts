@@ -19,7 +19,29 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
   @Get() // Get /pokemon/ OR /pokemon/type=:value
-  findAll(@Query('type') type?: 'Fire' | 'Water' | 'Grass ') {
+  findAll(
+    @Query('type')
+    type?:
+      | 'Fire'
+      | 'Water'
+      | 'Grass'
+      | 'Rock'
+      | 'Ground'
+      | 'Poison'
+      | 'Bug'
+      | 'Ghost'
+      | 'Dragon'
+      | 'Dark'
+      | 'Steel'
+      | 'Fairy'
+      | 'Psychic'
+      | 'Fighting'
+      | 'Normal'
+      | 'Flying'
+      | 'Electric'
+      | 'Ice'
+      | 'Stellar',
+  ) {
     return this.pokemonService.findAll(type);
   }
 

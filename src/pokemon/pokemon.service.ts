@@ -13,7 +13,28 @@ export class PokemonService {
     { id: 6, name: 'Oddish', type: 'Grass' },
   ];
 
-  findAll(role?: 'Fire' | 'Water' | 'Grass ') {
+  findAll(
+    role?:
+      | 'Fire'
+      | 'Water'
+      | 'Grass'
+      | 'Rock'
+      | 'Ground'
+      | 'Poison'
+      | 'Bug'
+      | 'Ghost'
+      | 'Dragon'
+      | 'Dark'
+      | 'Steel'
+      | 'Fairy'
+      | 'Psychic'
+      | 'Fighting'
+      | 'Normal'
+      | 'Flying'
+      | 'Electric'
+      | 'Ice'
+      | 'Stellar',
+  ) {
     if (role) {
       return this.pokemon.filter((pokemon) => pokemon.type === role);
     }
