@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 
@@ -21,8 +22,8 @@ export class PokemonController {
   }
 
   @Get(':id') //Get /pokemon/:id
-  findOne(@Param('id') id: string) {
-    return this.pokemonService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.pokemonService.findOne(id);
   }
 
   @Post() //POST /pokemon/
@@ -32,14 +33,14 @@ export class PokemonController {
 
   @Patch(':id') //Patch /pokemon/:id
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() pokemonUpdate: { name: string; type: 'Fire' | 'Water' | 'Grass' },
   ) {
-    return this.pokemonService.update(+id, pokemonUpdate);
+    return this.pokemonService.update(id, pokemonUpdate);
   }
 
   @Delete(':id') //Delete /pokemon/:id
-  delete(@Param('id') id: string) {
-    return this.pokemonService.delete(+id);
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.pokemonService.delete(id);
   }
 }
