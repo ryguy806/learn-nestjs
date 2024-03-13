@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePokemonDto } from './dto/create-pokemon.dto';
+import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 
 @Injectable()
 export class PokemonService {
@@ -22,7 +24,7 @@ export class PokemonService {
     return this.pokemon.find((pokemon) => pokemon.id === id);
   }
 
-  create(pokemon: { name: string; type: 'Fire' | 'Water' | 'Grass' }) {
+  create(pokemon: CreatePokemonDto) {
     const pokemonByHighestId = [...this.pokemon].sort((a, b) => {
       return b.id - a.id;
     });
@@ -35,10 +37,7 @@ export class PokemonService {
     return newPokemon;
   }
 
-  update(
-    id: number,
-    pokemonUpdate: { name?: string; type?: 'Fire' | 'Water' | 'Grass' },
-  ) {
+  update(id: number, pokemonUpdate: UpdatePokemonDto) {
     this.pokemon.map((pokemon) => {
       if (pokemon.id === id) {
         return { ...pokemon, ...pokemonUpdate };

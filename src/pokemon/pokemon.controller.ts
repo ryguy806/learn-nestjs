@@ -10,6 +10,8 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
+import { CreatePokemonDto } from './dto/create-pokemon.dto';
+import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 
 //Order matters a lot!
 
@@ -27,14 +29,14 @@ export class PokemonController {
   }
 
   @Post() //POST /pokemon/
-  create(@Body() pokemon: { name: string; type: 'Fire' | 'Water' | 'Grass' }) {
+  create(@Body() pokemon: CreatePokemonDto) {
     return this.pokemonService.create(pokemon);
   }
 
   @Patch(':id') //Patch /pokemon/:id
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() pokemonUpdate: { name: string; type: 'Fire' | 'Water' | 'Grass' },
+    @Body() pokemonUpdate: UpdatePokemonDto,
   ) {
     return this.pokemonService.update(id, pokemonUpdate);
   }
